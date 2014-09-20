@@ -11,8 +11,9 @@ class Beeminder:
 
     API_URL = 'https://www.beeminder.com/api/v1/'
 
-    def __init__(self, auth_token):
+    def __init__(self, auth_token, username=None):
         self.auth_token = auth_token
+        self.setuser(username)
         self._user = None
         self._goals = {}
         self._data = {}
@@ -47,7 +48,7 @@ class Beeminder:
     @property
     def username(self):
         '''Return the user's username'''
-        return self.user['username']
+        return self._username or self.user['username']
 
     def goal(self, slug):
         '''Return the goal object for the given slug'''
